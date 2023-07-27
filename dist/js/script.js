@@ -7,7 +7,7 @@ var __webpack_exports__ = {};
 
 
 window.addEventListener("DOMContentLoaded", () => {
-  // Creating tabs
+  // Tabs
 
   const tabs = document.querySelectorAll(".tabheader__item"),
     tabsParent = document.querySelector(".tabheader__items"),
@@ -40,7 +40,7 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Creating a countdown timer on the website
+  // Timer on the website
 
   const deadline = "2023-10-27";
   function getTimeRemaining(endtime) {
@@ -92,6 +92,45 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
   setClock(".timer", deadline);
+
+  // Modal window
+
+  const modalTrigger = document.querySelectorAll("[data-modal]"),
+    modal = document.querySelector(".modal"),
+    modalCloseBtn = document.querySelector("[data-close]");
+  function openModal() {
+    modal.classList.add("show");
+    modal.classList.remove("hide");
+    document.body.style.overflow = "hidden";
+    clearTimeout(modalTimerId);
+  }
+  function closeModal() {
+    modal.classList.add("hide");
+    modal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  modalTrigger.forEach(btn => {
+    btn.addEventListener("click", openModal);
+  });
+  modalCloseBtn.addEventListener("click", closeModal);
+  modal.addEventListener("click", e => {
+    if (e.target === modal) {
+      closeModal();
+    }
+  });
+  document.addEventListener("keydown", e => {
+    if (e.code === "Escape" && modal.classList.contains("show") || e.code === "Backspace" && modal.classList.contains("show")) {
+      closeModal();
+    }
+  });
+  const modalTimerId = setTimeout(openModal, 30000);
+  function showModalByScroll() {
+    if (window.scrollY + document.documentElement.clientHeight >= document.documentElement.scrollHeight - 1) {
+      openModal();
+      window.removeEventListener("scroll", showModalByScroll);
+    }
+  }
+  window.addEventListener("scroll", showModalByScroll);
 });
 /******/ })()
 ;
