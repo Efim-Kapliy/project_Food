@@ -93,7 +93,6 @@ window.addEventListener("DOMContentLoaded", () => {
   }
   setClock(".timer", deadline);
 });
-console.log("GO");
 /******/ })()
 ;
 //# sourceMappingURL=script.js.map
