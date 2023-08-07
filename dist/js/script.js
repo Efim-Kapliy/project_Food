@@ -195,28 +195,25 @@ window.addEventListener("DOMContentLoaded", () => {
         margin: 0 auto;
       `;
       form.insertAdjacentElement("afterend", statusMessage);
-      const request = new XMLHttpRequest();
-      request.open("POST", "server.php");
-      request.setRequestHeader("Content-type", "application/json");
       const formData = new FormData(form);
       const object = {};
       formData.forEach((value, key) => {
         object[key] = value;
       });
-      const json = JSON.stringify(object);
-      request.send(json);
-      request.addEventListener("load", () => {
-        if (request.status === 200) {
-          console.log(request.response);
-          showThanksModal(message.success);
-          form.reset(); // reset the form
-          statusMessage.remove();
-        } else {
-          showThanksModal(message.failure);
-        }
-      });
+      const request = fetch("server.php", {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: JSON.stringify(object)
+      }).then(response => response.text).then(response => {
+        console.log(response);
+        showThanksModal(message.success);
+        statusMessage.remove();
+      }).catch(() => showThanksModal(message.failure)).finally(() => form.reset()); // reset the form
     });
   }
+
   function showThanksModal(message) {
     const prevModalDialog = document.querySelector(".modal__dialog");
     prevModalDialog.classList.add("hide");
