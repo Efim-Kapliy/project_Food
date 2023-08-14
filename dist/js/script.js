@@ -272,6 +272,8 @@ window.addEventListener("DOMContentLoaded", () => {
       return indexName.textContent = value;
     }
   }
+
+  // Slider 2 display
   addZero(total, slides.length);
   addZero(current, slideIndex);
   slidesField.style.width = 100 * slides.length + "%";
@@ -281,6 +283,8 @@ window.addEventListener("DOMContentLoaded", () => {
   slides.forEach(slide => {
     slide.style.width = width;
   });
+
+  // Slider 3 switching
   next.addEventListener("click", () => {
     if (offset == +width.slice(0, width.length - 2) * (slides.length - 1)) {
       offset = 0;
@@ -313,54 +317,6 @@ window.addEventListener("DOMContentLoaded", () => {
     }
     addZero(current, slideIndex);
   });
-
-  // // Slider 1 filter
-  // if (slides.length === 0) slideIndex = 0;
-
-  // function addZero(indexName, value) {
-  //   if (value < 10) {
-  //     return (indexName.textContent = `0${value}`);
-  //   } else {
-  //     return (indexName.textContent = value);
-  //   }
-  // }
-
-  // addZero(total, slides.length);
-
-  // showSlide(slideIndex);
-
-  // // Slider 2 display
-  // function showSlide(n) {
-  //   if (n > slides.length) {
-  //     slideIndex = 1;
-  //   }
-
-  //   if (n < 1) {
-  //     slideIndex = slides.length;
-  //   }
-
-  //   slides.forEach((item) => item.classList.add("hide"));
-
-  //   if (slides.length !== 0) {
-  //     slides[slideIndex - 1].classList.add("show");
-  //     slides[slideIndex - 1].classList.remove("hide");
-  //   }
-
-  //   addZero(current, slideIndex);
-  // }
-
-  // function plusSlide(n) {
-  //   if (slides.length === 0) {
-  //     return (current.textContent = "00");
-  //   } else {
-  //     return showSlide((slideIndex += n));
-  //   }
-  // }
-
-  // // Slider 3 switching
-  // previous.addEventListener("click", () => plusSlide(-1));
-
-  // next.addEventListener("click", () => plusSlide(1));
 });
 /******/ })()
 ;
